@@ -11,3 +11,4 @@ A small MS Word Clone, made on Tkinter,
 - you can save your document
 
 - and you can open one
+![image](https://user-images.githubusercontent.com/70066593/228335988-da2ae799-e6e2-42eb-bdae-bca5b27a8255.png)
