@@ -62,26 +62,24 @@ def openFile():
     renderImages()
     f.close()
 menu=tk.Menu(root,tearoff=0)
-entry = tk.Entry()
+entry = tk.Entry(root)
 entry.pack()
-frame=None
-def tx():
-    global frame
-    if frame!=tkinterweb.HtmlFrame(root):
-        frame=tkinterweb.HtmlFrame(root)
-        frame.pack(fill="both", expand=True)
-    a = entry.get()
-    frame.load_website(f"{a}")
-    print(f"e{a}")
-
-button = tk.Button(text="go",command=tx)
-button.pack()
-
+button=None
+packed=False
 menu.add_command(label="Save",command=save)
 menu.add_command(label="Open",command=openFile)
-menu.add_command(label="Research",command=lambda:tx)
+menu.add_command(label="Research",command=lambda :exec("""
+if packed==False:
+    frame.pack(fill="both", expand=True)
+    packed=True
+a = entry.get()
+frame.load_website(f'{a}')
+
+"""))
 menu.add_command(label="Settings",command=lambda: mb.showinfo("","-Max Images: 2\n-Bold Text?: Yes\nDeveloper:Raphi-2Code"))
 root.config(menu=menu)
+
+frame = tkinterweb.HtmlFrame(root)
 def addImage():
     global html
     try:
