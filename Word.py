@@ -70,7 +70,8 @@ def tx():
     if frame!=tkinterweb.HtmlFrame(root):
         frame=tkinterweb.HtmlFrame(root)
     a = entry.get()
-    frame.load_html(f"{a}")
+    frame.load_website(f"{a}")
+    print(f"e{a}")
     frame.pack(fill="both", expand=True)
 
 button = tk.Button(text="go",command=tx)
@@ -78,8 +79,7 @@ button.pack()
 
 menu.add_command(label="Save",command=save)
 menu.add_command(label="Open",command=openFile)
-menu.add_command(label="Research",command=lambda :exec("""
-"""))
+menu.add_command(label="Research",command=lambda:tx)
 menu.add_command(label="Settings",command=lambda: mb.showinfo("","-Max Images: 2\n-Bold Text?: Yes\nDeveloper:Raphi-2Code"))
 root.config(menu=menu)
 def addImage():
