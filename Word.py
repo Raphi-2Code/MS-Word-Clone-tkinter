@@ -64,22 +64,21 @@ def openFile():
 menu=tk.Menu(root,tearoff=0)
 entry = tk.Entry()
 entry.pack()
+frame=None
 def tx():
-    try:search()
-    except:pass
+    global frame
+    if frame!=tkinterweb.HtmlFrame(root):
+        frame=tkinterweb.HtmlFrame(root)
+    a = entry.get()
+    frame.load_html(f"{a}")
+    frame.pack(fill="both", expand=True)
+
 button = tk.Button(text="go",command=tx)
 button.pack()
 
 menu.add_command(label="Save",command=save)
 menu.add_command(label="Open",command=openFile)
 menu.add_command(label="Research",command=lambda :exec("""
-def search():
-    a = entry.get()
-    frame.load_website(f'{a}')
-
-frame = tkinterweb.HtmlFrame(root)
-frame.load_website('www.google.com')
-frame.pack(fill="both", expand=True)
 """))
 menu.add_command(label="Settings",command=lambda: mb.showinfo("","-Max Images: 2\n-Bold Text?: Yes\nDeveloper:Raphi-2Code"))
 root.config(menu=menu)
