@@ -69,10 +69,10 @@ def tx():
     global frame
     if frame!=tkinterweb.HtmlFrame(root):
         frame=tkinterweb.HtmlFrame(root)
+        frame.pack(fill="both", expand=True)
     a = entry.get()
     frame.load_website(f"{a}")
     print(f"e{a}")
-    frame.pack(fill="both", expand=True)
 
 button = tk.Button(text="go",command=tx)
 button.pack()
