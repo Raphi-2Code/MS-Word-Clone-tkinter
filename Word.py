@@ -1,5 +1,5 @@
 from tkhtmlview import *
-import markdown, os, #win32api
+import markdown, os#, win32api
 import tkinter.filedialog as fd
 import tkinter.simpledialog as sd
 import tkinter.messagebox as mb
