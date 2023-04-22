@@ -1,5 +1,5 @@
 from tkhtmlview import *
-import markdown, os
+import markdown, os, win32api
 import tkinter.filedialog as fd
 import tkinter.simpledialog as sd
 import tkinter.messagebox as mb
@@ -26,6 +26,7 @@ def save():
         d.write(f"{images}")
         d.close()
     root.title("Word - "+os.path.basename(file))
+    return file
 def openFile():
     global images, html
     file = fd.askopenfilename(defaultextension='.txt', filetypes=[('Text documents', '*.txt')])
@@ -76,6 +77,13 @@ a = entry.get()
 frame.load_website(f'{a}')
 
 """))
+def printFile():
+    ""
+    #xyzw=save()
+    #win32api.ShellExecute(0, "print", xyzw, None, ".", 0)
+    #import os
+    #os.startfile("C:/Users/utsch/AppData/Roaming/.minecraft/screenshots/2023-02-19_18.10.40.png", "print")
+menu.add_command(label="Print",command=printFile)
 menu.add_command(label="Settings",command=lambda: mb.showinfo("","-Max Images: 2\n-Bold Text?: Yes\nDeveloper:Raphi-2Code"))
 root.config(menu=menu)
 
@@ -219,8 +227,19 @@ def font():
         if my_list[i]=='0':
             my_list[i]='𝟎'
     thtml.insert(thtml.index("insert"),"".join(map(str,my_list)))
+def subscript():
+    normal = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890+-/*=() .><"
+    subscript = "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘ🇶ʀꜱᴛᴜᴠᴡxʏᴢₐҍ𝔠Ꮄₑғޱₕᵢⱼₖₗₘₙₒₚཞᵣₛₜᵤᵥᴡₓᵧz₁₂₃₄₅₆₇₈₉₀₊₋⁄ₓ₌₍₎ .﹥﹤"
+    _p_=""
+    for _k_ in tk.simpledialog.askstring("Word", "Enter text: ₍ᴇₙₜₑᵣ ₜₑₓₜ₎"):
+        try:
+            _p_+=subscript[normal.index(_k_)]
+        except:
+            _p_+=str(_k_)
+    thtml.insert(thtml.index('insert'),_p_)
 tk.Button(master=root,text="Add Image",command=addImage).pack()
 tk.Button(master=root,text="Add Bold Text",command=font).pack()
+tk.Button(master=root,text="Add Subscript Text",command=subscript).pack()
 thtml=HTMLScrolledText(master=root)
 thtml.set_html(html)
 thtml.pack()
